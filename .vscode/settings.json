@@ -1,0 +1,5 @@
+{
+    "ansible.python.interpreterPath": "~/.venv/bin/python",
+    "ansible.executionEnvironment.enabled": true,
+    "ansible.executionEnvironment.containerEngine": "docker"
+}

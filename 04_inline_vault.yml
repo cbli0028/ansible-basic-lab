@@ -1,0 +1,25 @@
+---
+- name: Inline Encrypted Variables
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    admin_user: admin
+    admin_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          63646332333235396437373163643931663438303833393665393935386432623936343464313163
+          6530393731353265643561393736356339353161653461300a326136373965393433383561613438
+          38396334626566316465303461303230646330643066613562626334623137383432646133613862
+          3861636635353937380a633836356365306530666333373865653030646439386138396234616139
+          3530
+          
+    service_name: web-service
+    service_port: 443
+
+  tasks:
+    - name: Show configuration
+      ansible.builtin.debug:
+        msg:
+          - "Service: {{ service_name }} on port {{ service_port }}"
+          - "Admin user: {{ admin_user }}"
+          - "Admin password is encrypted: {{ admin_password[:10] }}..."

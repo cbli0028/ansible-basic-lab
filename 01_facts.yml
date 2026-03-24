@@ -1,0 +1,21 @@
+---
+- name: Facts Playbook
+  hosts: servers
+  gather_facts: true
+  vars:
+    add: ansible_facts['default_ipv4']['address']
+    netmask: ansible_facts['default_ipv4']['netmask']
+
+  tasks:
+    - name: Show Facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - name: Show IP of server
+      ansible.builtin.debug:
+        var: ansible_facts['default_ipv4']['address']
+
+
+    - name: Show Fact
+      ansible.builtin.debug:
+        msg: "{{ add }} and {{ netmask }}"
